@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -9,13 +8,7 @@ import FeaturedPost from '../FeaturedPost/FeaturedPost';
 import Footer from '../Footer/Footer';
 import Product, {products} from "../ProductCard/Product";
 import SuggestionsSidebar from "../SuggestionsSidebar/SuggestionsSidebar";
-import {EVENTS} from './Events'
-
-const useStyles = makeStyles((theme) => ({
-    mainGrid: {
-        marginTop: theme.spacing(3),
-    },
-}));
+import {DEFAULT_EVENTS} from './DEFAULT_EVENTS'
 
 const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -44,15 +37,13 @@ const featuredPosts = [
         imageText: 'Image Text',
     },
 ];
-export default function MainPage() {
-    const classes = useStyles();
-    const [selectedEvent, setSelectedEvent] = useState(null);
+export default function MainPage({event, setEvent}) {
 
     return (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Header events={EVENTS} setSelectedEvent={setSelectedEvent} />
+                <Header events={DEFAULT_EVENTS} setSelectedEvent={setEvent} />
                 <main style={{display: "flex", alignItems: "flex-start"}}>
                     <div>
                         <MainFeaturedPost post={mainFeaturedPost} />
@@ -65,7 +56,7 @@ export default function MainPage() {
                             })}
                         </Grid>
                     </div>
-                    <SuggestionsSidebar event={selectedEvent}/>
+                    <SuggestionsSidebar event={event} setEvent={setEvent}/>
                 </main>
             </Container>
             <Footer/>
