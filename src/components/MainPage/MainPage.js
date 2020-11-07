@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -21,6 +21,13 @@ const mainFeaturedPost = {
 
 export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
 
+    const [searchValue, setSearchValue] = useState('');
+
+    const getFilteredProducts = () => PRODUCTS.filter(value => {
+        return value.name.toLowerCase().includes(searchValue) || value.brandName.toLowerCase().includes(searchValue)
+    });
+
+
     const addProductToCart = (product) =>{
         setProductList(prev=>{
             let newCart = [...prev];
@@ -28,7 +35,7 @@ export default function MainPage({event, setEvent, productList, setProductList, 
             if(productIdx !== -1){
                 newCart[productIdx].quantity++;
             }else{
-                const newProd = {name:product.name, quantity:1, price: product.price};
+                const newProd = {name:product.name, quantity:1, price: product.price, data:product};
                 newCart.push(newProd);
             }
             return newCart;
@@ -46,12 +53,13 @@ export default function MainPage({event, setEvent, productList, setProductList, 
                     setProductList={setProductList}
                     isSignedIn={isSignedIn}
                     setIsSignedIn={setIsSignedIn}
+                    setSearchValue={setSearchValue}
                 />
                 <main style={{display: "flex", alignItems: "flex-start"}}>
                     <div>
                         <MainFeaturedPost post={mainFeaturedPost} />
                         <Grid container spacing={4}>
-                            {PRODUCTS.map((product) => {
+                            {getFilteredProducts().map((product) => {
                                 return <Product product={product} key={product.id} addProduct={addProductToCart}/>
                             })}
                         </Grid>

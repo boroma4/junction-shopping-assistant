@@ -77,11 +77,6 @@ export default function Header({productList, setProductList,cartDisabled}) {
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
                 <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} className={classes.logo}/>
-                <SearchBar
-                    className={classes.searchBar}
-                    //onChange={(newValue) => this.setState({ value: newValue })}
-                    //onRequestSearch={() => doSomethingWith(this.state.value)}
-                />
                 <div className={classes.rightSide}>
                     {!cartDisabled? (
                         <IconButton>

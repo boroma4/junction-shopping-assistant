@@ -20,7 +20,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
 import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
 
-const CheckoutPage = ({cart,setProductList}) => {
+const CheckoutPage = ({cart,setProductList, setPurchaseHistory}) => {
 const [localCart,setLocalCart] = useState(cart);
 const [suggestions, setSuggestions] = useState([]);
 
@@ -79,6 +79,12 @@ const [suggestions, setSuggestions] = useState([]);
         },
     }))(Button);
 
+    const onBuyClick = () =>{
+        setPurchaseHistory(prev=>{
+            return [...prev, ...cart.map(prod => prod.data) ]
+        })
+    };
+
   return (
       <Container>
         <Header cartDisabled={true} />
@@ -113,7 +119,7 @@ const [suggestions, setSuggestions] = useState([]);
                     </CardContent>
                 </Card>)}
 
-                <ColorButton>Buy <PaymentIcon fontSize={"large"}/></ColorButton>
+                <ColorButton onClick={onBuyClick}>Buy <PaymentIcon fontSize={"large"}/></ColorButton>
             </Grid>
         </Grid>
       </Container>
