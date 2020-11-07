@@ -7,7 +7,8 @@ import Hidden from "@material-ui/core/Hidden";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
-
+import IconButton from "@material-ui/core/IconButton";
+import AddShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined';
 
 const useStyles = makeStyles({
     card: {
@@ -26,11 +27,10 @@ const useStyles = makeStyles({
 
 
 
-const Product = ({product}) => {
+const Product = ({product, addProduct}) => {
     const classes = useStyles();
     return(
         <Grid item xs={12} md={6}>
-            <CardActionArea component="a" href="#">
                 <Card className={classes.card}>
                     <div className={classes.cardDetails}>
                         <CardContent>
@@ -43,8 +43,13 @@ const Product = ({product}) => {
                             <Typography variant="subtitle1" paragraph>
                                 {product.description}
                             </Typography>
-                            <Typography variant="subtitle1" color="primary">
+                            <Typography variant="subtitle1" color="default">
                                 Price: {product.price}$
+                                <span>
+                                    <IconButton color={'primary'} onClick={()=>addProduct(product)}>
+                                        <AddShoppingCartOutlinedIcon fontSize={'large'}/>
+                                    </IconButton>
+                                </span>
                             </Typography>
                         </CardContent>
                     </div>
@@ -52,7 +57,6 @@ const Product = ({product}) => {
                         <CardMedia component="img" className={classes.cardMedia} src={product.pic} title={product.name}/>
                     </Hidden>
                 </Card>
-            </CardActionArea>
         </Grid>);
 };
 
