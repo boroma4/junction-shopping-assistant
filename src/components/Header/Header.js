@@ -4,11 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
 import logo from '../../logo.png'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import Typography from "@material-ui/core/Typography";
+
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -18,12 +21,18 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
     },
     toolbarSecondary: {
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         overflowX: 'auto',
+        marginBottom:'1vh'
     },
-    toolbarLink: {
-        padding: theme.spacing(1),
+    toolbarEvent: {
+        padding: theme.spacing(2),
         flexShrink: 0,
+        cursor:'pointer',
+        "&:hover": {
+            textDecoration: 'underline',
+            color:'gray'
+        },
     },
     rightSide:{
         marginLeft:'auto'
@@ -38,9 +47,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Header({sections, title}) {
+export default function Header({events}) {
     const classes = useStyles();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showEvents, setShowEvents] = useState(true);
 
     return (
         <React.Fragment>
@@ -65,20 +75,32 @@ export default function Header({sections, title}) {
                     }
                 </div>
             </Toolbar>
-            <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-                {sections.map((section) => (
-                    <Link
-                        color="inherit"
-                        noWrap
-                        key={section.title}
-                        variant="body2"
-                        href={section.url}
-                        className={classes.toolbarLink}
-                    >
-                        {section.title}
-                    </Link>
-                ))}
-            </Toolbar>
+            {
+                showEvents
+                    ?
+                    <IconButton style={{padding:0}} onClick={() => setShowEvents(false)}>
+                        <ArrowDropUpIcon />
+                    </IconButton>
+                    :
+                    <IconButton style={{padding:0}} onClick={() => setShowEvents(true)}>
+                        <ArrowDropDownIcon />
+                    </IconButton>
+            }
+            {showEvents &&
+                <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+                    <Typography variant="h6">
+                        Popular events:
+                    </Typography>
+                    {events.map((event) => (
+                        <Typography variant="p"
+                            key={event.title}
+                            className={classes.toolbarEvent}
+                        >
+                            {event.title}
+                        </Typography>
+                    ))}
+                </Toolbar>
+            }
         </React.Fragment>
     );
 }
