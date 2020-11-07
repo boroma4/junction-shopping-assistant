@@ -8,9 +8,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import logo from '../../logo.png'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
 
 
