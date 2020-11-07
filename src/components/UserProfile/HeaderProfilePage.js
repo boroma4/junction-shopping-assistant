@@ -54,8 +54,6 @@ export default function Header({events}) {
 
     let history = useHistory();
     const classes = useStyles();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [showEvents, setShowEvents] = useState(true);
 
     return (
         <React.Fragment>
@@ -70,41 +68,9 @@ export default function Header({events}) {
                     <IconButton>
                         <ShoppingCartIcon />
                     </IconButton>
-                    {isLoggedIn
-                        ? <IconButton onClick={()=>history.push("/Profile")}> <PersonIcon/></IconButton>
-
-                        :<Button variant="outlined" size="small" onClick={()=>setIsLoggedIn(true)}>
-                            Sign in
-                        </Button>
-                    }
                 </div>
             </Toolbar>
-            {
-                showEvents
-                    ?
-                    <IconButton style={{padding:0}} onClick={() => setShowEvents(false)}>
-                        <ArrowDropUpIcon />
-                    </IconButton>
-                    :
-                    <IconButton style={{padding:0}} onClick={() => setShowEvents(true)}>
-                        <ArrowDropDownIcon />
-                    </IconButton>
-            }
-            {showEvents &&
-                <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-                    <Typography variant="h6">
-                        Popular events:
-                    </Typography>
-                    {events.map((event) => (
-                        <Typography variant="p"
-                            key={event.title}
-                            className={classes.toolbarEvent}
-                        >
-                            {event.title}
-                        </Typography>
-                    ))}
-                </Toolbar>
-            }
+            
         </React.Fragment>
     );
 }

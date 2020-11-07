@@ -7,8 +7,7 @@ import {
   Route
 } from "react-router-dom";
 
-import Profile from "./Profile";
-
+import Profile from "./components/UserProfile/Profile"
 function App() {
   return (
     <Router>
