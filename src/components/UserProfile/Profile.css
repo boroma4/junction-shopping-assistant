@@ -6,21 +6,19 @@
     align-items: center;
 }
 
-.avatar {
+.MuiAvatar-root {
     height: 200px;
     width: 200px;
 }
 
 .profileHeader {
-    display: flex;
-    flex-direction: column;
-    flex: 0.35;
+    align-items: center;
 }
 
 .graph {
-    flex: 0.65;
-    display: flex;
-    flex-direction: column;
+    align-items: center;
+    height: 600px;
+    width: 600px;
 }
 
 .profilebody {
