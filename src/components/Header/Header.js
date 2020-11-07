@@ -11,7 +11,13 @@ import PersonIcon from '@material-ui/icons/Person';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Typography from "@material-ui/core/Typography";
-
+import Profile from '../UserProfile/Profile';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -67,7 +73,7 @@ export default function Header({events}) {
                     </IconButton>
                     {isLoggedIn
                         ?<IconButton>
-                            <PersonIcon />
+                            <PersonIcon href={'./Profile'}/>  
                         </IconButton>
                         :<Button variant="outlined" size="small" onClick={()=>setIsLoggedIn(true)}>
                             Sign in
