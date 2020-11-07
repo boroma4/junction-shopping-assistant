@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     shopAssBtn: {
         marginRight: '1vw'
     },
+    logo:{
+        cursor:"pointer",
+    },
     searchBar:{
         width:'60vw',
         marginLeft:'10vw',
@@ -72,7 +75,7 @@ export default function Header({productList, setProductList}) {
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
-                <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} />
+                <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} className={classes.logo}/>
                 <SearchBar
                     className={classes.searchBar}
                     //onChange={(newValue) => this.setState({ value: newValue })}
