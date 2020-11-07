@@ -81,7 +81,14 @@ const [suggestions, setSuggestions] = useState([]);
 
     const onBuyClick = () =>{
         setPurchaseHistory(prev=>{
-            return [...prev, ...cart.map(prod => prod.data) ]
+            const newPurchases = cart.map(product => {
+               let purchaseData = {...product.data};
+               purchaseData.price *= product.quantity;
+               purchaseData.cap *= product.quantity;
+               purchaseData.date = Date();
+               return purchaseData;
+            });
+            return [...prev, ...newPurchases ]
         })
     };
 

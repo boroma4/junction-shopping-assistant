@@ -9,16 +9,21 @@ import HistogramGraphToilet from "./HistogramGraphToilet";
 import HistogramGraphMiscellenaous from "./HistogramGraphMisecllenaous";
 
 const myData = [
-    
+
     { x: "Toilet", y: 400 },
     { x: "Bathroom", y: 900 },
     { x: "Miscellaneous", y: 300 },
 ];
 
 
-const PieChart = () => {
+const PieChart = ({purchaseHistory}) => {
 
     let history = useHistory();
+    const myData = [
+    {x: 'Toilet', y: purchaseHistory.filter(purchase => purchase.cat === 'Toilet').reduce((total, purchase) => total + purchase.price, 0)},
+    {x: 'Bathroom', y: purchaseHistory.filter(purchase => purchase.cat === 'Bathroom').reduce((total, purchase) => total + purchase.price, 0)},
+    {x: 'Misc', y: purchaseHistory.filter(purchase => purchase.cat === 'Misc').reduce((total, purchase) => total + purchase.price, 0)}
+    ];
 
     const [isHistogram, setIsHistogram] = useState(false);
     const [textType,setTextType] = useState(undefined);
@@ -26,11 +31,11 @@ const PieChart = () => {
     const decideHistogram = (text) => {
         switch (text) {
             case "Toilet":
-                return <HistogramGraphToilet/>
+                return <HistogramGraphToilet/>;
             case "Bathroom":
-                return <HistogramGraph />
-            case "Miscellaneous":
-                return <HistogramGraphMiscellenaous/>
+                return <HistogramGraph />;
+            case "Misc":
+                return <HistogramGraphMiscellenaous/>;
             default:
                 break;
         }
