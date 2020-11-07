@@ -9,8 +9,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+            <Link color="inherit" href="https://github.com/boroma4/junction-shopping-assistant">
+                EasyCart
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -21,24 +21,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     footer: {
         backgroundColor: theme.palette.background.paper,
-        // marginTop: theme.spacing(8),
         padding: theme.spacing(6, 0),
     },
 }));
 
-export default function Footer(props) {
+export default function Footer() {
     const classes = useStyles();
-    const { description, title } = props;
 
     return (
         <footer className={classes.footer}>
             <Container maxWidth="lg">
-                <Typography variant="h6" align="center" gutterBottom>
-                    {title}
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                    {description}
-                </Typography>
                 <Copyright />
             </Container>
         </footer>
