@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Header({events}) {
+export default function Header({events, setSelectedEvent}) {
     const classes = useStyles();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showEvents, setShowEvents] = useState(true);
@@ -128,8 +128,9 @@ export default function Header({events}) {
                     </Typography>
                     {events.map((event) => (
                         <Typography variant="p"
-                            key={event.title}
-                            className={classes.toolbarEvent}
+                                    key={event.title}
+                                    className={classes.toolbarEvent}
+                                    onClick={()=>setSelectedEvent(event)}
                         >
                             {event.title}
                         </Typography>
