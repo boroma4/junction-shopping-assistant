@@ -11,7 +11,7 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-export default function Profile({ productList, setProductList }) {
+export default function Profile({ productList, setProductList, purchaseHistory }) {
   return (
     <div>
       <HeaderProfilePage
@@ -29,7 +29,7 @@ export default function Profile({ productList, setProductList }) {
           <ProfileContent />
         </TabPanel>
         <TabPanel>
-          <Graphs />
+          <Graphs purchaseHistory={purchaseHistory} />
         </TabPanel>
         <TabPanel>
           <AssistantSettings />
