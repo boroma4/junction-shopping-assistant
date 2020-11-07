@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -20,6 +20,12 @@ const mainFeaturedPost = {
 };
 
 export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
+
+    const [searchValue, setSearchValue] = useState('');
+
+
+    const getFilteredProducts = () => PRODUCTS.filter(value => value.name.toLowerCase().includes(searchValue));
+
 
     const addProductToCart = (product) =>{
         setProductList(prev=>{
@@ -46,12 +52,13 @@ export default function MainPage({event, setEvent, productList, setProductList, 
                     setProductList={setProductList}
                     isSignedIn={isSignedIn}
                     setIsSignedIn={setIsSignedIn}
+                    setSearchValue={setSearchValue}
                 />
                 <main style={{display: "flex", alignItems: "flex-start"}}>
                     <div>
                         <MainFeaturedPost post={mainFeaturedPost} />
                         <Grid container spacing={4}>
-                            {PRODUCTS.map((product) => {
+                            {getFilteredProducts().map((product) => {
                                 return <Product product={product} key={product.id} addProduct={addProductToCart}/>
                             })}
                         </Grid>
