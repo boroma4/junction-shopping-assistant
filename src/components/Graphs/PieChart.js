@@ -5,12 +5,14 @@ import { useHistory } from "react-router-dom";
 import HistogramGraph from "./HistogramGraph"
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import HistogramGraphToilet from "./HistogramGraphToilet";
+import HistogramGraphMiscellenaous from "./HistogramGraphMisecllenaous";
 
 const myData = [
     
-    { x: "$100 Toilet", y: 400 },
-    { x: "$300 Bathroom", y: 900 },
-    { x: "$150 Miscellaneous", y: 300 },
+    { x: "Toilet", y: 400 },
+    { x: "Bathroom", y: 900 },
+    { x: "Miscellaneous", y: 300 },
 ];
 
 
@@ -19,6 +21,20 @@ const PieChart = () => {
     let history = useHistory();
 
     const [isHistogram, setIsHistogram] = useState(false);
+    const [textType,setTextType] = useState(undefined);
+
+    const decideHistogram = (text) => {
+        switch (text) {
+            case "Toilet":
+                return <HistogramGraphToilet/>
+            case "Bathroom":
+                return <HistogramGraph />
+            case "Miscellaneous":
+                return <HistogramGraphMiscellenaous/>
+            default:
+                break;
+        }
+    };
 
     return (
         <Container >
@@ -31,14 +47,24 @@ const PieChart = () => {
                         events={[{
                             target: "data",
                             eventHandlers: {
-                                onClick: () => { setIsHistogram(true) }
+                              onClick: () => {
+                                return [
+                                    {
+                                    target: "labels",
+                                    mutation: ({ text }) => {
+                                        setIsHistogram(true);
+                                        setTextType(text);
+                                    }
+                                  }
+                                ];
+                              }
                             }
-                        }]}
+                          }]}
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    {isHistogram ?
-                        (<HistogramGraph />) :
+                    {textType && isHistogram ?
+                        (decideHistogram(textType)) :
                         (<></>)
                     }
                 </Grid>

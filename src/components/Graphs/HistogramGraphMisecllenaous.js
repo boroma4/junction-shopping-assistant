@@ -3,11 +3,11 @@ import '../UserProfile/Profile.css';
 import { VictoryBar, VictoryChart} from "victory";
 
 const sampleData = [
-    { x: "Shampoo", y: 400 },
-    { x: "Toothpaste", y: 700 },
-    { x: "Toothbrush", y: 100 },
+    { x: "Plastic cup", y: 900 },
+    { x: "Trash bags", y: 400 },
+    { x: "Hand sanitizer", y: 700 },
 ];
-const HistogramGraph = () => {
+const HistogramGraphMiscellenaous = () => {
     return (
         <div>
             <VictoryChart domainPadding={{ x: 40, y: 40 }}>
@@ -20,4 +20,4 @@ const HistogramGraph = () => {
     );
 };
 
-export default HistogramGraph;
+export default HistogramGraphMiscellenaous;

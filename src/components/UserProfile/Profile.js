@@ -7,6 +7,9 @@ import './Profile.css'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { AssistantSettings } from '../AssistantSettings/AssistantSettings'
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 export default function Profile({ productList, setProductList }) {
   return (
@@ -18,9 +21,9 @@ export default function Profile({ productList, setProductList }) {
 
       <Tabs>
         <TabList>
-          <Tab>Profile</Tab>
-          <Tab>Budget</Tab>
-          <Tab>Assistant Settings</Tab>
+          <Tab><AccountCircleIcon/> Profile</Tab>
+          <Tab><AccountBalanceIcon/>Budget</Tab>
+          <Tab><SettingsIcon/>Assistant Settings</Tab>
         </TabList>
         <TabPanel>
           <ProfileContent />

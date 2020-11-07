@@ -10,6 +10,7 @@ import React from 'react'
 export const AssistantSettings = () => {
   return (
     <div className="centered">
+        
       <List>
         <ListItem>
           <ListItemText primary={`Activate Saving Mode`} />
