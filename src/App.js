@@ -17,6 +17,7 @@ function App() {
   const [productList,setProductList] = useState([]);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [userSettings, setUserSettings] = useState({save:false, eco:false, emails: false});
 
   return (
     <Router>
@@ -30,6 +31,8 @@ function App() {
                 productList={productList}
                 purchaseHistory={purchaseHistory}
                 setProductList={setProductList}
+                userSettings ={userSettings}
+                setUserSettings={setUserSettings}
             />
           </Route>
           <Route path="/Histogram">
@@ -41,6 +44,7 @@ function App() {
                       setProductList={setProductList}
                       isSignedIn={isSignedIn}
                       setIsSignedIn={setIsSignedIn}
+                      userSettings={userSettings}
             />
           </Route>
         </Switch>
