@@ -8,6 +8,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import HistogramGraph from './components/UserProfile/HistogramGraph';
 
 function App() {
 
@@ -24,6 +25,9 @@ function App() {
                 productList={productList}
                 setProductList={setProductList}
             />
+          </Route>
+          <Route path="/Histogram">
+            <HistogramGraph/>
           </Route>
           <Route path="/" >
             <MainPage event={event} setEvent={setEvent}
