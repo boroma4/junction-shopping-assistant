@@ -9,12 +9,12 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-import CardActions from "@material-ui/core/CardActions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import green from "@material-ui/core/colors/green";
-import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import {useHistory} from 'react-router-dom'
 
 
@@ -37,8 +37,22 @@ const CartPopup = ({productList,setProductList,stationary}) => {
         let newState = [...productList];
         newState.splice(idx,1);
         setProductList(newState)
-        // USE THIS TO UPDATE GLOBAL STATE OF PRODUCT LIST IN THE APP
-      //setProductList(newState);
+    };
+
+    const calcTotal = () =>{
+        return productList.reduce((total, product)=> {
+            return total + product.price * product.quantity;
+        }, 0);
+    };
+
+    const onChangeQuantity = (e, idx, change) =>{
+        let newState = [...productList];
+        let product = newState[idx];
+        product.quantity += change;
+        if(product.quantity === 0){
+            newState.splice(idx,1);
+        }
+        setProductList(newState)
     };
     if (!stationary) stationary = false;
 
@@ -54,17 +68,29 @@ const CartPopup = ({productList,setProductList,stationary}) => {
                     ):
                     (
                         <List>
-
                             {productList.map((product,idx)=>{
                                 return <ListItem>
-                                    <ListItemText key={idx} primary={product.txt} secondary={"helo"}/>
-                                    <IconButton color={"secondary"} aria-label="Delete record" component="span">
-                                        <DeleteForeverIcon onClick={(event)=>onDeleteClick(event,idx)}/>
+                                    <ListItemText key={idx} primary={product.name} secondary={`Qty: ${product.quantity}`}/>
+                                    <span style={{width:'2vw'}}/>
+                                    <ListItemText key={idx} primary={`Price: ${product.price}$`}/>
+                                    <IconButton color={"primary"} component="span" onClick={(event)=>onChangeQuantity(event,idx, +1)}>
+                                        <AddIcon />
+                                    </IconButton>
+                                    <IconButton color={"default"} component="span" onClick={(event)=>onChangeQuantity(event,idx, -1)}>
+                                        <RemoveIcon />
+                                    </IconButton>
+                                    <IconButton color={"secondary"} aria-label="Delete record" component="span" onClick={(event)=>onDeleteClick(event,idx)}>
+                                        <DeleteForeverIcon />
                                     </IconButton>
                                 </ListItem>
                             })}
                         </List>
                     )}
+                    <Divider/>
+
+                <Typography gutterBottom variant="h5" component="h2" align={"left"}>
+                    Total: {calcTotal()}$
+                </Typography>
                 {stationary? (<></>): (
                     productList.length === 0?
                             (<ColorButton style={{justifyContent: 'center'}}>Generate list</ColorButton>)

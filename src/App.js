@@ -9,11 +9,12 @@ import {
   Route
 } from "react-router-dom";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
+import HistogramGraph from './components/UserProfile/HistogramGraph';
 
 function App() {
 
   const[event, setEvent] = useState(null);
-  const [productList,setProductList] = useState([{txt:"Me"},{txt:"him"},{txt:"us"}]);
+  const [productList,setProductList] = useState([]);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
@@ -28,6 +29,9 @@ function App() {
                 productList={productList}
                 setProductList={setProductList}
             />
+          </Route>
+          <Route path="/Histogram">
+            <HistogramGraph/>
           </Route>
           <Route path="/" >
             <MainPage event={event} setEvent={setEvent}
