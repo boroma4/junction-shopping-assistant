@@ -12,7 +12,7 @@ const HistogramGraphToilet = () => {
         <div>
             <VictoryChart domainPadding={{ x: 40, y: 40 }}>
                 <VictoryBar
-                    style={{ data: { fill: "#c43a31" } }}
+                    style={{ data: { fill: "#007df5" } }}
                     data={sampleData}
                 />
             </VictoryChart>

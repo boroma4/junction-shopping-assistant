@@ -19,15 +19,12 @@ const myData = [
 const PieChart = ({purchaseHistory}) => {
 
     let history = useHistory();
-<<<<<<< HEAD
-=======
     const myData = [
     {x: 'Toilet', y: purchaseHistory.filter(purchase => purchase.cat === 'Toilet').reduce((total, purchase) => total + purchase.price, 0)},
     {x: 'Bathroom', y: purchaseHistory.filter(purchase => purchase.cat === 'Bathroom').reduce((total, purchase) => total + purchase.price, 0)},
     {x: 'Misc', y: purchaseHistory.filter(purchase => purchase.cat === 'Misc').reduce((total, purchase) => total + purchase.price, 0)}
     ];
 
->>>>>>> 969cd714419c1d8ddc23c09080445f1e6dbea1a3
     const [isHistogram, setIsHistogram] = useState(false);
     const [textType,setTextType] = useState(undefined);
 
@@ -50,7 +47,7 @@ const PieChart = ({purchaseHistory}) => {
                 <Grid item xs={6}>
                     <VictoryPie
                         data={myData}
-                        colorScale={["blue", "yellow", "red"]}
+                        colorScale={["#007df5", "yellow", "red"]}
                         radius={100}
                         events={[{
                             target: "data",
