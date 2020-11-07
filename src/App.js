@@ -6,6 +6,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 
 function App() {
 
@@ -15,7 +16,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/Profile" component={Profile} />
+          {/*<Route exact path="/Profile" component={Profile} />*/}
+          <Route path="/checkout" >
+            <CheckoutPage/>
+          </Route>
           <Route path="/" >
             <MainPage event={event} setEvent = {setEvent}/>
           </Route>
