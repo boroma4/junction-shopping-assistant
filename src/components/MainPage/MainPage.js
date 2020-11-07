@@ -12,7 +12,7 @@ import FeaturedPost from '../FeaturedPost/FeaturedPost';
 import Main from './Main';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
-
+import Product, {products} from "../ProductCard/Product";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -101,6 +101,10 @@ export default function MainPage() {
                         {featuredPosts.map((post) => (
                             <FeaturedPost key={post.title} post={post} />
                         ))}
+                        {products.map((product) => {
+                            return <Product product={product} key={product.id}/>
+                        })}
+
                     </Grid>
                     <Grid container spacing={5} className={classes.mainGrid}>
                         <Main title="From the firehose" posts={posts} />
