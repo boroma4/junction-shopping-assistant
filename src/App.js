@@ -28,11 +28,12 @@ function App() {
           <Route exact path="/Profile">
             <Profile
                 productList={productList}
+                purchaseHistory={purchaseHistory}
                 setProductList={setProductList}
             />
           </Route>
           <Route path="/Histogram">
-            <HistogramGraph purchaseHistory={purchaseHistory}/>
+            <HistogramGraph />
           </Route>
           <Route path="/" >
             <MainPage event={event} setEvent={setEvent}
