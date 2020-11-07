@@ -23,8 +23,9 @@ export default function MainPage({event, setEvent, productList, setProductList, 
 
     const [searchValue, setSearchValue] = useState('');
 
-
-    const getFilteredProducts = () => PRODUCTS.filter(value => value.name.toLowerCase().includes(searchValue));
+    const getFilteredProducts = () => PRODUCTS.filter(value => {
+        return value.name.toLowerCase().includes(searchValue) || value.brandName.toLowerCase().includes(searchValue)
+    });
 
 
     const addProductToCart = (product) =>{
