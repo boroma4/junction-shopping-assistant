@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Header({events}) {
+export default function Header({events, setSelectedEvent}) {
 
     let history = useHistory();
     const classes = useStyles();
@@ -132,8 +132,9 @@ export default function Header({events}) {
                     </Typography>
                     {events.map((event) => (
                         <Typography variant="p"
-                            key={event.title}
-                            className={classes.toolbarEvent}
+                                key={event.title}
+                                className={classes.toolbarEvent}
+                                    onClick={()=>setSelectedEvent(event)}
                         >
                             {event.title}
                         </Typography>

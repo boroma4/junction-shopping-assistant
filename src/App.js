@@ -1,5 +1,7 @@
 import './App.css';
 import MainPage from "./components/MainPage/MainPage";
+import Profile from "./components/UserProfile/Profile"
+
 import React, {useState} from "react";
 import {
   BrowserRouter as Router,
@@ -7,7 +9,6 @@ import {
   Route
 } from "react-router-dom";
 
-import Profile from "./components/UserProfile/Profile"
 function App() {
 
   const[event, setEvent] = useState(null);
