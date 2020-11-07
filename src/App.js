@@ -6,7 +6,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Profile from './components/UserProfile/Profile';
+
+import Profile from "./Profile";
 
 function App() {
   return (
