@@ -17,8 +17,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Card from "@material-ui/core/Card";
+import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
 
 const CheckoutPage = ({cart,setProductList}) => {
 const [localCart,setLocalCart] = useState(cart);
@@ -47,6 +47,20 @@ const [suggestions, setSuggestions] = useState([]);
         return suggestionsFound;
     };
 
+    const addProduct = (product) => {
+        setProductList(prev=>{
+            let newCart = [...prev];
+            const productIdx = prev.map((prod) => prod.name).indexOf(product.name);
+            if(productIdx !== -1){
+                newCart[productIdx].quantity++;
+            }else{
+                const newProd = {name:product.name, quantity:1, price: product.price};
+                newCart.push(newProd);
+            }
+            return newCart;
+        })
+    };
+
     /********************* First render **************************/
     useEffect(()=>{
         setSuggestions(applySuggestions());
@@ -63,7 +77,7 @@ const [suggestions, setSuggestions] = useState([]);
                 backgroundColor: purple[700],
             },
         },
-    }))(Button)
+    }))(Button);
 
   return (
       <Container>
@@ -71,6 +85,9 @@ const [suggestions, setSuggestions] = useState([]);
         <Grid container spacing={3} alignContent={"center"} style={{marginTop:"15vh"}}>
             <Grid item xs={4}>
                 <CartPopup productList={cart} setProductList={setProductList} stationary={true}/>
+                <Typography gutterBottom variant="h5" component="h2" style={{fontStyle:"italic",marginTop:"5vh"}}>
+                    Do you feel like you could be saving more? <SmallButton>Show me!</SmallButton>
+                </Typography>
             </Grid>
             <Grid item xs={8}>
                 {suggestions.length === 0? (
@@ -87,8 +104,8 @@ const [suggestions, setSuggestions] = useState([]);
                                     <ListItemText>
                                         {suggestion.name}
                                     </ListItemText>
-                                    <IconButton>
-
+                                    <IconButton color={'primary'} onClick={()=>addProduct(suggestion)}>
+                                        <AddShoppingCartOutlinedIcon fontSize={'large'}/>
                                     </IconButton>
                                 </ListItem>
                             })}
@@ -98,9 +115,6 @@ const [suggestions, setSuggestions] = useState([]);
                 </Card>)}
 
                 <ColorButton>Buy <PaymentIcon fontSize={"large"}/></ColorButton>
-                <Typography gutterBottom variant="h5" component="h2" style={{fontStyle:"italic"}}>
-                    Do you feel like you could be saving more? <SmallButton>Show me!</SmallButton>
-                </Typography>
             </Grid>
         </Grid>
       </Container>

@@ -11,7 +11,6 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import withStyles from "@material-ui/core/styles/withStyles";
 import green from "@material-ui/core/colors/green";
-import blue from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
