@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -15,6 +15,7 @@ import green from "@material-ui/core/colors/green";
 import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
+import {useHistory} from 'react-router-dom'
 
 
 const ColorButton = withStyles((theme) => ({
@@ -41,48 +42,48 @@ const ColorButtonSec = withStyles((theme) => ({
     },
 }))(Button);
 
-const CartPopup = ({productList,setProductList}) => {
-    const [productListLocal,setProductListLocal] = useState([{txt:"Me"},{txt:"him"},{txt:"us"}]);
+const CartPopup = ({productList,setProductList,stationary}) => {
+    let history = useHistory();
 
     const onDeleteClick = (e,idx) => {
-        let newState = [...productListLocal];
+        let newState = [...productList];
         newState.splice(idx,1);
-      setProductListLocal(newState)
+        setProductList(newState)
         // USE THIS TO UPDATE GLOBAL STATE OF PRODUCT LIST IN THE APP
       //setProductList(newState);
     };
+    if (!stationary) stationary = false;
 
     return (
         <Card>
             <CardHeader title="This is your shopping cart!"/>
             <Divider variant={"middle"}/>
             <CardContent>
-                {productListLocal.length===0? (
+                {productList.length===0? (
                         <Typography gutterBottom variant="h5" component="h2" align={"center"}>
                             Nothing here yet!
                         </Typography>
                     ):
                     (
                         <List>
-                            {productListLocal.map((product,idx)=>{
+
+                            {productList.map((product,idx)=>{
                                 return <ListItem>
                                     <ListItemText key={idx} primary={product.txt} />
                                     <IconButton color={"secondary"} aria-label="Delete record" component="span">
                                         <DeleteForeverIcon onClick={(event)=>onDeleteClick(event,idx)}/>
                                     </IconButton>
-
                                 </ListItem>
                             })}
                         </List>
                     )}
-                {productListLocal.length === 0? (<ColorButton style={{justifyContent: 'center'}}>Generate list</ColorButton>) : (<ColorButton style={{justifyContent: 'center'}}>Proceed to checkout</ColorButton>)}
-
-
+                {stationary? (<></>): (
+                    productList.length === 0?
+                            (<ColorButton style={{justifyContent: 'center'}}>Generate list</ColorButton>)
+                            :
+                            (<ColorButton style={{justifyContent: 'center'}} onClick={()=>{history.push("/checkout")}}>Proceed to checkout</ColorButton>)
+                )}
             </CardContent>
-            {/*<CardActions>*/}
-
-
-            {/*</CardActions>*/}
         </Card>);
 };
 

@@ -1,5 +1,7 @@
 import './App.css';
 import MainPage from "./components/MainPage/MainPage";
+import Profile from "./components/UserProfile/Profile"
+
 import React, {useState} from "react";
 import {
   BrowserRouter as Router,
@@ -11,17 +13,29 @@ import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 function App() {
 
   const[event, setEvent] = useState(null);
+  const [productList,setProductList] = useState([{txt:"Me"},{txt:"him"},{txt:"us"}]);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
     <Router>
       <div className="App">
         <Switch>
-          {/*<Route exact path="/Profile" component={Profile} />*/}
-          <Route path="/checkout" >
-            <CheckoutPage/>
+          <Route exact path="/Checkout" >
+            <CheckoutPage cart={productList} setProductList={setProductList}/>
+          </Route>
+          <Route exact path="/Profile">
+            <Profile
+                productList={productList}
+                setProductList={setProductList}
+            />
           </Route>
           <Route path="/" >
-            <MainPage event={event} setEvent = {setEvent}/>
+            <MainPage event={event} setEvent={setEvent}
+                      productList={productList}
+                      setProductList={setProductList}
+                      isSignedIn={isSignedIn}
+                      setIsSignedIn={setIsSignedIn}
+            />
           </Route>
         </Switch>
       </div>

@@ -1,17 +1,18 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
-import ProfileHeader from './ProfileHeader';
-import ProfileContent from './';
+import React from "react";
+import ProfileHeader from "./ProfileHeader";
+import HeaderProfilePage from "./HeaderProfilePage"
+import Footer from "../Footer/Footer";
 
-const ProfilePage = () =>{
-  return (
-    <Grid>
-      <Grid.Column width={16}>
-        <ProfileHeader />
-        <ProfileContent />
-      </Grid.Column>
-    </Grid>
-  );
-};
 
-export default observer(ProfilePage);
+export default function Profile ({productList, setProductList}) {
+  return(
+      <div>
+        <HeaderProfilePage
+            productList={productList}
+            setProductList={setProductList}
+        />
+        <ProfileHeader/>
+        <Footer/>
+      </div>
+  )
+}

@@ -1,43 +1,42 @@
 import React from "react";
 import {
-  Segment,
-  Item,
-  Header,
-  Button,
-  Grid,
-  Statistic,
-  Divider,
-  Reveal,
 } from "semantic-ui-react";
+import Avatar from '@material-ui/core/Avatar';
+import './Profile.css';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const ProfileHeader = () => {
   return (
-    <Segment>
-      <Grid>
-        <Grid.Column width={12}>
-          <Item.Group>
-            <Item>
-              <Item.Image
-                avatar
-                size="small"
-                src={profile.image || "/assets/user.png"}
-              />
-              <Item.Content verticalAlign="middle">
-                <Header as="h1">{profile.displayName}</Header>
-              </Item.Content>
-            </Item>
-          </Item.Group>
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Statistic.Group widths={2}>
-            <Statistic label="Followers" value={profile.followersCount} />
-            <Statistic label="Following" value={profile.followingCount} />
-          </Statistic.Group>
-          <Divider />
-        </Grid.Column>
-      </Grid>
-    </Segment>
+    <div>
+      <div className="centered">
+        <List>
+          <ListItem>
+            <h1>Name</h1>
+            <ListItem>
+            <Avatar alt="" src="#" className="avatar"/>
+          </ListItem>
+          </ListItem>
+          <ListItem>
+            Email
+          </ListItem>
+          <ListItem>
+            <div>Number Of Family Members: 4</div>
+          </ListItem>
+          <ListItem>
+          <ListItemText  primary={`Activate Saving Mode`} />
+            <ListItemSecondaryAction>
+              <Checkbox/>
+            </ListItemSecondaryAction>
+          </ListItem>
+
+        </List>
+      </div>
+    </div>
   );
 };
 
-export default observer(ProfileHeader);
+export default ProfileHeader;
