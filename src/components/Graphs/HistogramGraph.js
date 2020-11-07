@@ -24,7 +24,6 @@ const HistogramGraph = () => {
                     data={sampleData}
                 />
             </VictoryChart>
-            <Button size="big" onClick={()=>{history.goBack("")}}>Go Back to Profile</Button>
         </div>
     );
 };

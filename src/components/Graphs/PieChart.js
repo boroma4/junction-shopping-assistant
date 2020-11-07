@@ -14,7 +14,7 @@ const myData = [
 ];
 
 
-const Graphs = () => {
+const PieChart = () => {
 
     let history = useHistory();
 
@@ -47,4 +47,4 @@ const Graphs = () => {
     );
 };
 
-export default Graphs;
+export default PieChart;
