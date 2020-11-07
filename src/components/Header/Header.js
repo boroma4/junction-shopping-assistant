@@ -52,11 +52,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Header({events, setSelectedEvent}) {
+export default function Header({events, setSelectedEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
 
     let history = useHistory();
     const classes = useStyles();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showEvents, setShowEvents] = useState(true);
     /************************************ Popup declarations start *******************************************/
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -77,7 +76,7 @@ export default function Header({events, setSelectedEvent}) {
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
-                <img src={logo} alt="Logo" height="50" width="60" />
+                <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} />
                 <SearchBar
                     className={classes.searchBar}
                     //onChange={(newValue) => this.setState({ value: newValue })}
@@ -102,13 +101,12 @@ export default function Header({events, setSelectedEvent}) {
                             }}
                             transitionDuration={800}
                         >
-                            <CartPopup/>
+                            <CartPopup productList={productList} setProductList={setProductList}/>
                         </Popover>
                     </IconButton>
-                    {isLoggedIn
+                    {isSignedIn
                         ? <IconButton onClick={()=>history.push("/Profile")}> <PersonIcon/></IconButton>
-
-                        :<Button variant="outlined" size="small" onClick={()=>setIsLoggedIn(true)}>
+                        :<Button variant="outlined" size="small" onClick={()=>setIsSignedIn(true)}>
                             Sign in
                         </Button>
                     }

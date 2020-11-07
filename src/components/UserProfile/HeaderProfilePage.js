@@ -9,6 +9,8 @@ import logo from '../../logo.png'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useHistory } from "react-router-dom";
+import Popover from "@material-ui/core/Popover";
+import CartPopup from "../Cart/CartPopup";
 
 
 
@@ -41,21 +43,36 @@ const useStyles = makeStyles((theme) => ({
     },
     searchBar:{
         width:'60vw',
-        marginLeft:'2vw',
+        marginLeft:'10vw',
         marginRight:'auto'
     }
 }));
 
 
-export default function Header({events}) {
+export default function Header({productList, setProductList}) {
 
     let history = useHistory();
     const classes = useStyles();
 
+    /************************************ Popup declarations start *******************************************/
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+    /************************************ Popup declarations end *******************************************/
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
-                <img src={logo} alt="Logo" height="50" width="60" />
+                <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} />
                 <SearchBar
                     className={classes.searchBar}
                     //onChange={(newValue) => this.setState({ value: newValue })}
@@ -63,11 +80,29 @@ export default function Header({events}) {
                 />
                 <div className={classes.rightSide}>
                     <IconButton>
-                        <ShoppingCartIcon />
+                        <ShoppingCartIcon onClick={handleClick}/>
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            style={{marginTop:"20px"}}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                            transitionDuration={800}
+                        >
+                            <CartPopup productList={productList} setProductList={setProductList}/>
+                        </Popover>
                     </IconButton>
                 </div>
             </Toolbar>
-            
+
         </React.Fragment>
     );
 }
