@@ -19,7 +19,6 @@ const myData = [
 const PieChart = () => {
 
     let history = useHistory();
-
     const [isHistogram, setIsHistogram] = useState(false);
     const [textType,setTextType] = useState(undefined);
 
