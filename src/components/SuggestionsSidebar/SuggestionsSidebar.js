@@ -55,39 +55,39 @@ export default function SuggestionsSidebar({event, setEvent}){
     };
 
     return(
-        <div>
-            { event &&
-            <StickyBox className={classes.root}>
+            <StickyBox className={classes.root} offsetTop={20} offsetBottom={20}>
+                {event &&
                 <List className={classes.list}>
-                    <IconButton onClick={()=>setEvent(null)} className={classes.closeButton}>
+                    <IconButton onClick={() => setEvent(null)} className={classes.closeButton}>
                         <CloseIcon/>
                     </IconButton>
                     <h4>
                         {event.title}
                     </h4>
                     <Divider/>
-                {event.suggestions.map(suggestion => (
-                    <ListItem key={suggestion.name} role={undefined} dense button onClick={handleToggle(suggestion.name)}>
-                        <ListItemIcon>
-                            <Checkbox
-                                edge="start"
-                                checked={event.suggestions[getEventSuggestionIdx(suggestion.name)].checked}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ 'aria-labelledby': `checkbox-list-label-${suggestion.name}` }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText id={`checkbox-list-label-${suggestion.name}`} primary={suggestion.name} />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="comments" onClick={() => removeSuggestion(suggestion.name)}>
-                                <HighlightOffIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                ))}
+                    {event.suggestions.map(suggestion => (
+                        <ListItem key={suggestion.name} role={undefined} dense button
+                                  onClick={handleToggle(suggestion.name)}>
+                            <ListItemIcon>
+                                <Checkbox
+                                    edge="start"
+                                    checked={event.suggestions[getEventSuggestionIdx(suggestion.name)].checked}
+                                    tabIndex={-1}
+                                    disableRipple
+                                    inputProps={{'aria-labelledby': `checkbox-list-label-${suggestion.name}`}}
+                                />
+                            </ListItemIcon>
+                            <ListItemText id={`checkbox-list-label-${suggestion.name}`} primary={suggestion.name}/>
+                            <ListItemSecondaryAction>
+                                <IconButton edge="end" aria-label="comments"
+                                            onClick={() => removeSuggestion(suggestion.name)}>
+                                    <HighlightOffIcon/>
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    ))}
                 </List>
+                }
             </StickyBox>
-            }
-        </div>
     )
 }

@@ -9,8 +9,8 @@ import React from 'react'
 
 export const AssistantSettings = () => {
   return (
-    <div className="centered">
-        
+    <div className="centered" style={{height:'70vh'}}>
+
       <List>
         <ListItem>
           <ListItemText primary={`Activate Saving Mode`} />

@@ -131,7 +131,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
             {showEvents &&
                 <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                     <Typography variant="h6">
-                        Popular events:
+                        Popular purchase lists:
                     </Typography>
                     {events.map((event) => (
                         <Typography variant="p"

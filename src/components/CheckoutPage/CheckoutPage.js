@@ -20,9 +20,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
 import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
 
+import {useHistory} from 'react-router-dom';
+
 const CheckoutPage = ({cart,setProductList, setPurchaseHistory}) => {
 const [localCart,setLocalCart] = useState(cart);
 const [suggestions, setSuggestions] = useState([]);
+const history = useHistory();
 
     const ColorButton = withStyles((theme) => ({
         root: {
@@ -89,7 +92,7 @@ const [suggestions, setSuggestions] = useState([]);
                return purchaseData;
             });
             return [...prev, ...newPurchases ]
-        })
+        });
     };
 
   return (

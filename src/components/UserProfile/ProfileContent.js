@@ -23,7 +23,7 @@ const ProfileContent = () => {
             <h1>Nakasone Hisoka</h1>
           </ListItem>
           <ListItem>
-            <div><b>Email: </b> nakasone420hisoka@hotgirls.com</div>
+            <div><b>Email: </b> fake@fake.fake</div>
           </ListItem>
           <ListItem>
             <div><b>Number Of Family Members:</b> 4</div>
