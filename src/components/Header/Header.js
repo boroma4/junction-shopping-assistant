@@ -12,7 +12,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
-
+import Badge from '@material-ui/core/Badge';
 import CartPopup from "../Cart/CartPopup";
 import Popover from "@material-ui/core/Popover";
 
@@ -87,7 +87,9 @@ export default function Header({events, setSelectedEvent, productList, setProduc
                 />
                 <div className={classes.rightSide}>
                     <IconButton>
-                        <ShoppingCartIcon onClick={handleClick}/>
+                        <Badge badgeContent={productList.length} color="primary">
+                            <ShoppingCartIcon onClick={handleClick}/>
+                        </Badge>
                         <Popover
                             id={id}
                             open={open}

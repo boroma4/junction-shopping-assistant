@@ -13,7 +13,7 @@ import HistogramGraph from './components/UserProfile/HistogramGraph';
 function App() {
 
   const[event, setEvent] = useState(null);
-  const [productList,setProductList] = useState([{txt:"Me"},{txt:"him"},{txt:"us"}]);
+  const [productList,setProductList] = useState([]);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (

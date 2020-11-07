@@ -20,6 +20,21 @@ const mainFeaturedPost = {
 };
 
 export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
+
+    const addProductToCart = (product) =>{
+        setProductList(prev=>{
+            let newCart = [...prev];
+            const productIdx = prev.map((prod) => prod.name).indexOf(product.name);
+            if(productIdx !== -1){
+                newCart[productIdx].quantity++;
+            }else{
+                const newProd = {name:product.name, quantity:1, price: product.price};
+                newCart.push(newProd);
+            }
+            return newCart;
+        })
+    };
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -37,7 +52,7 @@ export default function MainPage({event, setEvent, productList, setProductList, 
                         <MainFeaturedPost post={mainFeaturedPost} />
                         <Grid container spacing={4}>
                             {PRODUCTS.map((product) => {
-                                return <Product product={product} key={product.id}/>
+                                return <Product product={product} key={product.id} addProduct={addProductToCart}/>
                             })}
                         </Grid>
                     </div>
