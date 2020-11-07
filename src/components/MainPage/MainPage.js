@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -8,19 +8,14 @@ import MainFeaturedPost from '../MainFeaturedPost/MainFeaturedPost';
 import FeaturedPost from '../FeaturedPost/FeaturedPost';
 import Footer from '../Footer/Footer';
 import Product, {products} from "../ProductCard/Product";
+import SuggestionsSidebar from "../SuggestionsSidebar/SuggestionsSidebar";
+import {EVENTS} from './Events'
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
         marginTop: theme.spacing(3),
     },
 }));
-
-const events = [
-    { title: 'Party', url: '#' },
-    { title: 'Corona shopping', url: '#' },
-    { title: 'Gifts', url: '#' },
-
-];
 
 const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -51,23 +46,26 @@ const featuredPosts = [
 ];
 export default function MainPage() {
     const classes = useStyles();
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     return (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Header events={events} />
-                <main>
-                    <MainFeaturedPost post={mainFeaturedPost} />
-                    <Grid container spacing={4}>
-                        {featuredPosts.map((post) => (
-                            <FeaturedPost key={post.title} post={post} />
-                        ))}
-                        {products.map((product) => {
-                            return <Product product={product} key={product.id}/>
-                        })}
-
-                    </Grid>
+                <Header events={EVENTS} setSelectedEvent={setSelectedEvent} />
+                <main style={{display: "flex", alignItems: "flex-start"}}>
+                    <div>
+                        <MainFeaturedPost post={mainFeaturedPost} />
+                        <Grid container spacing={4}>
+                            {featuredPosts.map((post) => (
+                                <FeaturedPost key={post.title} post={post} />
+                            ))}
+                            {products.map((product) => {
+                                return <Product product={product} key={product.id}/>
+                            })}
+                        </Grid>
+                    </div>
+                    <SuggestionsSidebar event={selectedEvent}/>
                 </main>
             </Container>
             <Footer/>

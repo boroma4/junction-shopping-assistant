@@ -6,16 +6,17 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Profile from './components/UserProfile/Profile';
+
+import Profile from "./Profile";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <switch>
+        <Switch>
+          <Route exact path="/Profile" component={Profile} />
           <Route path="/" component={MainPage} />
-          <Route path="/Profile" component={Profile} />
-        </switch>
+        </Switch>
       </div>
     </Router>
   );
