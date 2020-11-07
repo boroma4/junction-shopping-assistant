@@ -11,6 +11,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Typography from "@material-ui/core/Typography";
+import CartPopup from "../Cart/CartPopup";
+import Popover from "@material-ui/core/Popover";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +53,21 @@ export default function Header({events, setSelectedEvent}) {
     const classes = useStyles();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showEvents, setShowEvents] = useState(true);
+    /************************************ Popup declarations start *******************************************/
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+    /************************************ Popup declarations end *******************************************/
+
+
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <React.Fragment>
@@ -63,7 +80,25 @@ export default function Header({events, setSelectedEvent}) {
                 />
                 <div className={classes.rightSide}>
                     <IconButton>
-                        <ShoppingCartIcon />
+                        <ShoppingCartIcon onClick={handleClick}/>
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            style={{marginTop:"20px"}}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                            transitionDuration={800}
+                        >
+                            <CartPopup/>
+                        </Popover>
                     </IconButton>
                     {isLoggedIn
                         ?<IconButton>
