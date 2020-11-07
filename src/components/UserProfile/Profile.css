@@ -1,0 +1,12 @@
+.centered {
+    height: 100vh;
+    /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    height: 200px;
+    width: 200px;
+}

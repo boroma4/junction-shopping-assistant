@@ -4,13 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import PersonIcon from '@material-ui/icons/Person';
 import logo from '../../logo.png'
 import SearchBar from "material-ui-search-bar";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PersonIcon from '@material-ui/icons/Person';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
+
 import CartPopup from "../Cart/CartPopup";
 import Popover from "@material-ui/core/Popover";
 
@@ -49,7 +51,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Header({events, setSelectedEvent}) {
+
+export default function Header({events}) {
+
+    let history = useHistory();
     const classes = useStyles();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showEvents, setShowEvents] = useState(true);
@@ -101,9 +106,8 @@ export default function Header({events, setSelectedEvent}) {
                         </Popover>
                     </IconButton>
                     {isLoggedIn
-                        ?<IconButton>
-                            <PersonIcon />
-                        </IconButton>
+                        ? <IconButton onClick={()=>history.push("/Profile")}> <PersonIcon/></IconButton>
+
                         :<Button variant="outlined" size="small" onClick={()=>setIsLoggedIn(true)}>
                             Sign in
                         </Button>
@@ -128,9 +132,8 @@ export default function Header({events, setSelectedEvent}) {
                     </Typography>
                     {events.map((event) => (
                         <Typography variant="p"
-                                    key={event.title}
-                                    className={classes.toolbarEvent}
-                                    onClick={()=>setSelectedEvent(event)}
+                            key={event.title}
+                            className={classes.toolbarEvent}
                         >
                             {event.title}
                         </Typography>

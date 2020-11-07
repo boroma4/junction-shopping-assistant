@@ -7,6 +7,7 @@ import {
   Route
 } from "react-router-dom";
 
+import Profile from "./components/UserProfile/Profile"
 function App() {
 
   const[event, setEvent] = useState(null);
