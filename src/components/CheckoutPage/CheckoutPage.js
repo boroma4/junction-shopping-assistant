@@ -110,7 +110,6 @@ const [suggestions, setSuggestions] = useState([]);
                                 </ListItem>
                             })}
                         </List>
-
                     </CardContent>
                 </Card>)}
 
