@@ -1,5 +1,7 @@
 import './App.css';
 import MainPage from "./components/MainPage/MainPage";
+import Profile from "./components/UserProfile/Profile"
+
 import React, {useState} from "react";
 import {
   BrowserRouter as Router,
@@ -7,7 +9,6 @@ import {
   Route
 } from "react-router-dom";
 
-import Profile from "./components/UserProfile/Profile"
 function App() {
 
   const[event, setEvent] = useState(null);
@@ -16,7 +17,7 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          {/*<Route exact path="/Profile" component={Profile} />*/}
+          <Route exact path="/Profile" component={Profile} />
           <Route path="/" >
             <MainPage event={event} setEvent = {setEvent}/>
           </Route>
