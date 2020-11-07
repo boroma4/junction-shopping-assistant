@@ -15,10 +15,10 @@ const ProfileContent = () => {
       <div className="centered">
         <List>
           <ListItem>
-            <h1>Name</h1>
-            <ListItem>
-            <Avatar alt="" src="#" className="avatar"/>
+            <Avatar alt="" src="#" className="MuiAvatar-root"/>
           </ListItem>
+          <ListItem>
+            <h1>Name</h1>
           </ListItem>
           <ListItem>
             Email
@@ -27,9 +27,9 @@ const ProfileContent = () => {
             <div>Number Of Family Members: 4</div>
           </ListItem>
           <ListItem>
-          <ListItemText  primary={`Activate Saving Mode`} />
+            <ListItemText primary={`Activate Saving Mode`} />
             <ListItemSecondaryAction>
-              <Checkbox/>
+              <Checkbox />
             </ListItemSecondaryAction>
           </ListItem>
 
