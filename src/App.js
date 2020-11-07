@@ -15,6 +15,7 @@ function App() {
 
   const[event, setEvent] = useState(null);
   const [productList,setProductList] = useState([]);
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
@@ -22,7 +23,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/Checkout" >
-            <CheckoutPage cart={productList} setProductList={setProductList}/>
+            <CheckoutPage cart={productList} setProductList={setProductList} setPurchaseHistory={setPurchaseHistory}/>
           </Route>
           <Route exact path="/Profile">
             <Profile
@@ -31,7 +32,7 @@ function App() {
             />
           </Route>
           <Route path="/Histogram">
-            <HistogramGraph/>
+            <HistogramGraph purchaseHistory={purchaseHistory}/>
           </Route>
           <Route path="/" >
             <MainPage event={event} setEvent={setEvent}

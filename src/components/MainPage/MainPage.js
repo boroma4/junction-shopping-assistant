@@ -35,7 +35,7 @@ export default function MainPage({event, setEvent, productList, setProductList, 
             if(productIdx !== -1){
                 newCart[productIdx].quantity++;
             }else{
-                const newProd = {name:product.name, quantity:1, price: product.price};
+                const newProd = {name:product.name, quantity:1, price: product.price, data:product};
                 newCart.push(newProd);
             }
             return newCart;
