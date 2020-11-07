@@ -52,12 +52,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Header({productList, setProductList,cartEnabled}) {
+export default function Header({productList, setProductList,cartDisabled}) {
 
     let history = useHistory();
     const classes = useStyles();
 
-    if(!cartEnabled) cartEnabled = true;
+    if(!cartDisabled) cartDisabled = false;
     /************************************ Popup declarations start *******************************************/
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -83,7 +83,7 @@ export default function Header({productList, setProductList,cartEnabled}) {
                     //onRequestSearch={() => doSomethingWith(this.state.value)}
                 />
                 <div className={classes.rightSide}>
-                    {cartEnabled? (
+                    {!cartDisabled? (
                         <IconButton>
                             <ShoppingCartIcon onClick={handleClick}/>
                             <Popover

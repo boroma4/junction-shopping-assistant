@@ -30,18 +30,6 @@ const ColorButton = withStyles((theme) => ({
     },
 }))(Button);
 
-const ColorButtonSec = withStyles((theme) => ({
-    root: {
-        color: "white",
-        backgroundColor: blue[700],
-        justifyContent: 'center',
-        margin: 5,
-        '&:hover': {
-            backgroundColor: blue[900],
-        },
-    },
-}))(Button);
-
 const CartPopup = ({productList,setProductList,stationary}) => {
     let history = useHistory();
 
@@ -69,7 +57,7 @@ const CartPopup = ({productList,setProductList,stationary}) => {
 
                             {productList.map((product,idx)=>{
                                 return <ListItem>
-                                    <ListItemText key={idx} primary={product.txt} />
+                                    <ListItemText key={idx} primary={product.txt} secondary={"helo"}/>
                                     <IconButton color={"secondary"} aria-label="Delete record" component="span">
                                         <DeleteForeverIcon onClick={(event)=>onDeleteClick(event,idx)}/>
                                     </IconButton>
