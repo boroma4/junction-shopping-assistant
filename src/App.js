@@ -9,7 +9,7 @@ import {
   Route
 } from "react-router-dom";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
-import HistogramGraph from './components/UserProfile/HistogramGraph';
+import HistogramGraph from './components/Graphs/HistogramGraph';
 
 function App() {
 

@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import './Profile.css';
+import '../UserProfile/Profile.css';
 import { VictoryPie } from "victory-pie";
 import { useHistory } from "react-router-dom";
 import HistogramGraph from "./HistogramGraph"
