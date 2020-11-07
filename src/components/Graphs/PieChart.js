@@ -34,7 +34,7 @@ const PieChart = ({purchaseHistory}) => {
                 <Grid item xs={6}>
                     <VictoryPie
                         data={myData}
-                        colorScale={["#007df5", "yellow", "red"]}
+                        colorScale={["#007df5", "ffc362", "#ff8a93"]}
                         radius={100}
                         events={[{
                             target: "data",

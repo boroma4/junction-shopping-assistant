@@ -12,7 +12,7 @@ const HistogramGraphMiscellenaous = () => {
         <div>
             <VictoryChart domainPadding={{ x: 40, y: 40 }}>
                 <VictoryBar
-                    style={{ data: { fill: "#c43a31" } }}
+                    style={{ data: { fill: "#ffc362" } }}
                     data={sampleData}
                 />
             </VictoryChart>
