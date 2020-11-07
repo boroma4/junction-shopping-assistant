@@ -94,7 +94,7 @@ export default function MainPage() {
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Header title="Blog" sections={sections} />
+                <Header sections={sections} />
                 <main>
                     <MainFeaturedPost post={mainFeaturedPost} />
                     <Grid container spacing={4}>
@@ -106,18 +106,9 @@ export default function MainPage() {
                         })}
 
                     </Grid>
-                    <Grid container spacing={5} className={classes.mainGrid}>
-                        <Main title="From the firehose" posts={posts} />
-                        <Sidebar
-                            title={sidebar.title}
-                            description={sidebar.description}
-                            archives={sidebar.archives}
-                            social={sidebar.social}
-                        />
-                    </Grid>
                 </main>
             </Container>
-            <Footer title="Footer" description="Something here to give the footer a purpose!" />
+            <Footer/>
         </React.Fragment>
     );
 }
