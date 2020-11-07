@@ -8,6 +8,8 @@ import List from '@material-ui/core/List';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import Face from '../../pics/face.jpg'
+import {Button} from "@material-ui/core";
 
 const ProfileContent = () => {
   return (
@@ -15,22 +17,25 @@ const ProfileContent = () => {
       <div className="centered">
         <List>
           <ListItem>
-            <Avatar alt="" src="#" className="MuiAvatar-root"/>
+            <img src={Face} alt="Italian Trulli" width={300} height={300} style={{borderRadius: '50%'}}/>
           </ListItem>
           <ListItem>
-            <h1>Name</h1>
+            <h1>Nakasone Hisoka</h1>
           </ListItem>
           <ListItem>
-            Email
+            <div><b>Email: </b> nakasone420hisoka@hotgirls.com</div>
           </ListItem>
           <ListItem>
-            <div>Number Of Family Members: 4</div>
+            <div><b>Number Of Family Members:</b> 4</div>
           </ListItem>
           <ListItem>
-            <ListItemText primary={`Activate Saving Mode`} />
-            <ListItemSecondaryAction>
-              <Checkbox />
-            </ListItemSecondaryAction>
+            <Button variant="contained" color="secondary">
+              Edit
+            </Button>
+            {/*<ListItemText primary={`Activate Saving Mode`} />*/}
+            {/*<ListItemSecondaryAction>*/}
+            {/*  <Checkbox />*/}
+            {/*</ListItemSecondaryAction>*/}
           </ListItem>
 
         </List>

@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Header({events, setSelectedEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
+export default function Header({events, setSelectedEvent, productList, setProductList, isSignedIn, setIsSignedIn, setSearchValue}) {
 
     let history = useHistory();
     const classes = useStyles();
@@ -82,7 +82,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
                 <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} className={classes.logo}/>
                 <SearchBar
                     className={classes.searchBar}
-                    //onChange={(newValue) => this.setState({ value: newValue })}
+                    onChange={(newValue) => setSearchValue(newValue)}
                     //onRequestSearch={() => doSomethingWith(this.state.value)}
                 />
                 <div className={classes.rightSide}>
