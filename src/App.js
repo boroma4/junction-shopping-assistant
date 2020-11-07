@@ -12,14 +12,26 @@ import {
 function App() {
 
   const[event, setEvent] = useState(null);
+  const [productList,setProductList] = useState([{txt:"Me"},{txt:"him"},{txt:"us"}]);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/Profile" component={Profile} />
+          <Route exact path="/Profile">
+            <Profile
+                productList={productList}
+                setProductList={setProductList}
+            />
+          </Route>
           <Route path="/" >
-            <MainPage event={event} setEvent = {setEvent}/>
+            <MainPage event={event} setEvent={setEvent}
+                      productList={productList}
+                      setProductList={setProductList}
+                      isSignedIn={isSignedIn}
+                      setIsSignedIn={setIsSignedIn}
+            />
           </Route>
         </Switch>
       </div>

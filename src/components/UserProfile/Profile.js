@@ -4,10 +4,13 @@ import HeaderProfilePage from "./HeaderProfilePage"
 import Footer from "../Footer/Footer";
 
 
-export default function Profile () {
+export default function Profile ({productList, setProductList}) {
   return(
       <div>
-        <HeaderProfilePage/>
+        <HeaderProfilePage
+            productList={productList}
+            setProductList={setProductList}
+        />
         <ProfileHeader/>
         <Footer/>
       </div>

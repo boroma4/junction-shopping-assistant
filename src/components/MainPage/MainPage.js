@@ -37,13 +37,20 @@ const featuredPosts = [
         imageText: 'Image Text',
     },
 ];
-export default function MainPage({event, setEvent}) {
+export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
 
     return (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Header events={DEFAULT_EVENTS} setSelectedEvent={setEvent} />
+                <Header
+                    events={DEFAULT_EVENTS}
+                    setSelectedEvent={setEvent}
+                    productList={productList}
+                    setProductList={setProductList}
+                    isSignedIn={isSignedIn}
+                    setIsSignedIn={setIsSignedIn}
+                />
                 <main style={{display: "flex", alignItems: "flex-start"}}>
                     <div>
                         <MainFeaturedPost post={mainFeaturedPost} />
