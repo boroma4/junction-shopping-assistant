@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
             color:'gray'
         },
     },
+    logo:{
+        cursor:"pointer",
+    },
     rightSide:{
         marginLeft:'auto'
     },
@@ -76,7 +79,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
-                <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} />
+                <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} className={classes.logo}/>
                 <SearchBar
                     className={classes.searchBar}
                     //onChange={(newValue) => this.setState({ value: newValue })}
