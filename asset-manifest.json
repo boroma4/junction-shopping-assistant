@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/junction-shopping-assistant/static/css/main.3c52b425.chunk.css",
+    "main.js": "/junction-shopping-assistant/static/js/main.6693f788.chunk.js",
+    "main.js.map": "/junction-shopping-assistant/static/js/main.6693f788.chunk.js.map",
+    "runtime-main.js": "/junction-shopping-assistant/static/js/runtime-main.cd8504ce.js",
+    "runtime-main.js.map": "/junction-shopping-assistant/static/js/runtime-main.cd8504ce.js.map",
+    "static/css/2.27175f2b.chunk.css": "/junction-shopping-assistant/static/css/2.27175f2b.chunk.css",
+    "static/js/2.369d58d1.chunk.js": "/junction-shopping-assistant/static/js/2.369d58d1.chunk.js",
+    "static/js/2.369d58d1.chunk.js.map": "/junction-shopping-assistant/static/js/2.369d58d1.chunk.js.map",
+    "static/js/3.9f4d8dd5.chunk.js": "/junction-shopping-assistant/static/js/3.9f4d8dd5.chunk.js",
+    "static/js/3.9f4d8dd5.chunk.js.map": "/junction-shopping-assistant/static/js/3.9f4d8dd5.chunk.js.map",
+    "index.html": "/junction-shopping-assistant/index.html",
+    "static/css/2.27175f2b.chunk.css.map": "/junction-shopping-assistant/static/css/2.27175f2b.chunk.css.map",
+    "static/css/main.3c52b425.chunk.css.map": "/junction-shopping-assistant/static/css/main.3c52b425.chunk.css.map",
+    "static/js/2.369d58d1.chunk.js.LICENSE.txt": "/junction-shopping-assistant/static/js/2.369d58d1.chunk.js.LICENSE.txt",
+    "static/media/face.8112fe53.jpg": "/junction-shopping-assistant/static/media/face.8112fe53.jpg",
+    "static/media/rsz_1red-party-cup-png-file.ff6af51f.png": "/junction-shopping-assistant/static/media/rsz_1red-party-cup-png-file.ff6af51f.png",
+    "static/media/rsz_hand-sanitizer-png-image.6c539ee7.png": "/junction-shopping-assistant/static/media/rsz_hand-sanitizer-png-image.6c539ee7.png",
+    "static/media/rsz_non-branded-liquid-hand-wash-transparent.7b78a6ef.png": "/junction-shopping-assistant/static/media/rsz_non-branded-liquid-hand-wash-transparent.7b78a6ef.png",
+    "static/media/rsz_toilet-paper-png.4a501a36.png": "/junction-shopping-assistant/static/media/rsz_toilet-paper-png.4a501a36.png",
+    "static/media/rsz_toothpaste.90491113.jpg": "/junction-shopping-assistant/static/media/rsz_toothpaste.90491113.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cd8504ce.js",
+    "static/css/2.27175f2b.chunk.css",
+    "static/js/2.369d58d1.chunk.js",
+    "static/css/main.3c52b425.chunk.css",
+    "static/js/main.6693f788.chunk.js"
+  ]
+}
