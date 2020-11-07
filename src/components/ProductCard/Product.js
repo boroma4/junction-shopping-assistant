@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined';
+import EcoIcon from '@material-ui/icons/Eco';
 
 const useStyles = makeStyles({
     card: {
@@ -36,6 +37,7 @@ const Product = ({product, addProduct}) => {
                         <CardContent>
                             <Typography component="h2" variant="h5">
                                 {product.name}
+                                {product.isEco && <EcoIcon style={{marginLeft:'5px'}}/>}
                             </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
                                 {product.brandName}
