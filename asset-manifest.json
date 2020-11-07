@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/junction-shopping-assistant/static/css/main.3c52b425.chunk.css",
-    "main.js": "/junction-shopping-assistant/static/js/main.6693f788.chunk.js",
-    "main.js.map": "/junction-shopping-assistant/static/js/main.6693f788.chunk.js.map",
+    "main.js": "/junction-shopping-assistant/static/js/main.b9b65eb4.chunk.js",
+    "main.js.map": "/junction-shopping-assistant/static/js/main.b9b65eb4.chunk.js.map",
     "runtime-main.js": "/junction-shopping-assistant/static/js/runtime-main.cd8504ce.js",
     "runtime-main.js.map": "/junction-shopping-assistant/static/js/runtime-main.cd8504ce.js.map",
     "static/css/2.27175f2b.chunk.css": "/junction-shopping-assistant/static/css/2.27175f2b.chunk.css",
@@ -26,6 +26,6 @@
     "static/css/2.27175f2b.chunk.css",
     "static/js/2.369d58d1.chunk.js",
     "static/css/main.3c52b425.chunk.css",
-    "static/js/main.6693f788.chunk.js"
+    "static/js/main.b9b65eb4.chunk.js"
   ]
 }
