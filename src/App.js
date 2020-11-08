@@ -24,7 +24,13 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/Checkout" >
-            <CheckoutPage cart={productList} setProductList={setProductList} setPurchaseHistory={setPurchaseHistory} purchaseHistory={purchaseHistory}/>
+            <CheckoutPage
+                cart={productList}
+                setProductList={setProductList}
+                setPurchaseHistory={setPurchaseHistory}
+                purchaseHistory={purchaseHistory}
+                userSettings={userSettings}
+            />
           </Route>
           <Route exact path="/Profile">
             <Profile
@@ -35,8 +41,15 @@ function App() {
                 setUserSettings={setUserSettings}
             />
           </Route>
-          <Route path="/Histogram">
-            <HistogramGraph />
+            <Route exact path="/Profile/Budget">
+              <Profile
+                  productList={productList}
+                  purchaseHistory={purchaseHistory}
+                  setProductList={setProductList}
+                  userSettings ={userSettings}
+                  setUserSettings={setUserSettings}
+                  tab={1}
+              />
           </Route>
           <Route path="/" >
             <MainPage event={event} setEvent={setEvent}
@@ -45,6 +58,7 @@ function App() {
                       isSignedIn={isSignedIn}
                       setIsSignedIn={setIsSignedIn}
                       userSettings={userSettings}
+                      purchaseHistory={purchaseHistory}
             />
           </Route>
         </Switch>

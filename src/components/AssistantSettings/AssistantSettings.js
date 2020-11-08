@@ -34,7 +34,6 @@ export const AssistantSettings = ({userSettings, setUserSettings}) => {
   };
   return (
     <div className="centered" style={{height:'70vh'}}>
-
       <List>
         <ListItem>
           <ListItemText primary={`Activate Saving Mode`} />

@@ -11,6 +11,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useHistory } from "react-router-dom";
 import Popover from "@material-ui/core/Popover";
 import CartPopup from "../Cart/CartPopup";
+import Badge from "@material-ui/core/Badge";
 
 
 
@@ -80,7 +81,9 @@ export default function Header({productList, setProductList,cartDisabled}) {
                 <div className={classes.rightSide}>
                     {!cartDisabled? (
                         <IconButton>
-                            <ShoppingCartIcon onClick={handleClick}/>
+                            <Badge badgeContent={productList.length} color="primary">
+                                <ShoppingCartIcon onClick={handleClick}/>
+                            </Badge>
                             <Popover
                                 id={id}
                                 open={open}

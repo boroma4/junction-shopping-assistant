@@ -21,10 +21,11 @@ import Card from "@material-ui/core/Card";
 import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
 import {useHistory} from 'react-router-dom';
 
-const CheckoutPage = ({cart,setProductList, setPurchaseHistory,purchaseHistory}) => {
-const [localCart,setLocalCart] = useState(cart);
+const CheckoutPage = ({cart,setProductList, setPurchaseHistory,purchaseHistory, userSettings}) => {
+
 const [suggestions, setSuggestions] = useState([]);
-const [finalCapResult, setFinalCupResult] = useState([]);
+const [ecoSuggestions, setEcoSuggestions] = useState([]);
+const [finalCapResult, setFinalCupResult] = useState({});
 const history = useHistory();
 
     const ColorButton = withStyles((theme) => ({
@@ -89,18 +90,14 @@ const history = useHistory();
             plcup:plcup,
             soap500:soap500,
             san500:san500
-        }
-
-
-
+        };
     };
 
     const queryUserProducts = (suggestedTypes) => {
         let suggestionArray = [];
         for(let i=0;i<suggestedTypes.length;i++){
-            let product = PRODUCTS.filter(prod => prod.type === suggestedTypes[i])[0];
             let previousPurchases = purchaseHistory.filter((purchase)=> purchase.type === suggestedTypes[i]);
-            if (!previousPurchases && previousPurchases.length!==0){
+            if (previousPurchases && previousPurchases.length!==0){
                 suggestionArray.push(previousPurchases[0]);
             }
 
@@ -111,8 +108,7 @@ const history = useHistory();
     const applySuggestions = () => {
         const latestDate = findLatestDate();
         let lastWeeksGoods = purchaseHistory.filter(purchase => purchase.date === latestDate);
-        const sumFunc = (acc,curVal)=> {return acc+curVal};
-        const sumFuncWithCalc = (acc,curVal)=> {return acc+curVal};
+        const sumFunc = (acc, curVal)=> {return acc+curVal};
 
         let lastWeekSum = calculateSum(sumFunc,lastWeeksGoods,"past");
         let thisCartSum = calculateSum(sumFunc,cart,"future");
@@ -120,7 +116,7 @@ const history = useHistory();
 
         for (let key in thisCartSum){
             let mlt = cart.find(elem => elem.data.type === key)?.quantity;
-            if (!mlt){
+            if (!mlt) {
                 mlt = 0;
             }
             if (thisCartSum !== 0){
@@ -147,16 +143,28 @@ const history = useHistory();
             if(productIdx !== -1){
                 newCart[productIdx].quantity++;
             }else{
-                const newProd = {name:product.name, quantity:1, price: product.price};
+                const newProd = {name:product.name, quantity:1, price: product.price, data:PRODUCTS.find((p) => p.name === product.name)};
                 newCart.push(newProd);
             }
             return newCart;
         })
     };
 
+    const applyEcoSuggestions = () =>{
+        let sug = [];
+        for(const product of cart){
+            if(!product.data.isEco){
+                const maybe = PRODUCTS.filter((prod)=> prod.type === product.data.type && prod.isEco)[0];
+                if(maybe) sug.push(maybe);
+            }
+        }
+        return sug;
+    };
+
     /********************* First render **************************/
     useEffect(()=>{
         setSuggestions(applySuggestions());
+        if(userSettings.eco) setEcoSuggestions(applyEcoSuggestions());
     },[]);
 
     const SmallButton = withStyles((theme) => ({
@@ -177,15 +185,13 @@ const history = useHistory();
 
         if(purchaseHistory.length !== 0){
             const latestDate = new Date(Math.max(...purchaseHistory.map(e => new Date(e.date))));
-            console.log(latestDate);
-            console.log(newDate);
             newDate.setDate(latestDate.getDate() + 7);
         }
         setPurchaseHistory(prev=>{
             const newPurchases = cart.map(product => {
                let purchaseData = {...product.data};
                purchaseData.price *= product.quantity;
-               purchaseData.cap *= product.quantity;
+               purchaseData.cap = finalCapResult[product.data.type];
                purchaseData.date = newDate;
                return purchaseData;
             });
@@ -195,6 +201,48 @@ const history = useHistory();
         history.push("/");
     };
 
+    const onShowMeMore = () =>{
+      history.push('/Profile/Budget');
+    };
+
+    const renderSuggestionCard = (lst, t) => {
+        return(
+            <Card>
+                <CardHeader title={t}/>
+                <Divider variant={"middle"}/>
+                <CardContent>
+                    <List>
+                        {lst.map((suggestion,idx)=>{
+                            return <ListItem key={idx}>
+                                <ListItemText>
+                                    {suggestion.name}
+                                </ListItemText>
+                                <IconButton color={'primary'} onClick={()=>(addProduct(suggestion))}>
+                                    <AddShoppingCartOutlinedIcon fontSize={'large'}/>
+                                </IconButton>
+                            </ListItem>
+                        })}
+                    </List>
+                </CardContent>
+            </Card>
+        )
+    };
+
+    const renderSuggestions = () =>{
+      if(suggestions.length !== 0 && ecoSuggestions.length !== 0){
+          return (
+              <div>
+                  {renderSuggestionCard(suggestions, 'We have noticed, you might be running out of these products within a week!')}
+                  {renderSuggestionCard (ecoSuggestions, 'We have found some greener options for you!')}
+              </div>
+      )
+      }else if(suggestions.length !== 0){
+          return renderSuggestionCard(suggestions, 'We have noticed, you might be running out of these products within a week!');
+      } else if (ecoSuggestions.length !== 0){
+          return renderSuggestionCard (ecoSuggestions, 'We have found some greener options for you!');
+      }
+    };
+
   return (
       <Container>
         <Header cartDisabled={true} />
@@ -202,33 +250,16 @@ const history = useHistory();
             <Grid item xs={4}>
                 <CartPopup productList={cart} setProductList={setProductList} stationary={true}/>
                 <Typography gutterBottom variant="h5" component="h2" style={{fontStyle:"italic",marginTop:"5vh"}}>
-                    Do you feel like you could be saving more? <SmallButton>Show me!</SmallButton>
+                    Do you feel like you could be saving more? <SmallButton onClick={()=>onShowMeMore()}>Show me!</SmallButton>
                 </Typography>
             </Grid>
             <Grid item xs={8}>
-                {suggestions.length === 0? (
+                {suggestions.length === 0 && ecoSuggestions.length === 0 ? (
                     <Typography gutterBottom variant="h5" component="h2" style={{fontStyle:"italic"}}>
                         Looks like you're all set up !
                     </Typography>
-                ) : (<Card>
-                    <CardHeader title="We have noticed, you might be running out of these products!"/>
-                    <Divider variant={"middle"}/>
-                    <CardContent>
-                        <List>
-                            {suggestions.map((suggestion,idx)=>{
-                                return <ListItem key={idx}>
-                                    <ListItemText>
-                                        {suggestion.name}
-                                    </ListItemText>
-                                    <IconButton color={'primary'} onClick={()=>addProduct(suggestion)}>
-                                        <AddShoppingCartOutlinedIcon fontSize={'large'}/>
-                                    </IconButton>
-                                </ListItem>
-                            })}
-                        </List>
-                    </CardContent>
-                </Card>)}
-
+                ) : renderSuggestions()
+                }
                 <ColorButton onClick={onBuyClick}>Buy <PaymentIcon fontSize={"large"}/></ColorButton>
             </Grid>
         </Grid>
