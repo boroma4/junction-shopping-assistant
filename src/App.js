@@ -23,7 +23,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/Checkout" >
-            <CheckoutPage cart={productList} setProductList={setProductList} setPurchaseHistory={setPurchaseHistory}/>
+            <CheckoutPage cart={productList} setProductList={setProductList} setPurchaseHistory={setPurchaseHistory} purchaseHistory={purchaseHistory}/>
           </Route>
           <Route exact path="/Profile">
             <Profile

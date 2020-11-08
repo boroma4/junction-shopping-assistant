@@ -68,10 +68,10 @@ const CartPopup = ({productList,setProductList,stationary}) => {
                     (
                         <List>
                             {productList.map((product,idx)=>{
-                                return <ListItem>
-                                    <ListItemText key={idx} primary={product.name} secondary={`Qty: ${product.quantity}`}/>
+                                return <ListItem key={idx}>
+                                    <ListItemText  primary={product.name} secondary={`Qty: ${product.quantity}`}/>
                                     <span style={{width:'2vw'}}/>
-                                    <ListItemText key={idx} primary={`Price: ${product.price}$`}/>
+                                    <ListItemText primary={`Price: ${product.price}$`}/>
                                     <IconButton color={"primary"} component="span" onClick={(event)=>onChangeQuantity(event,idx, +1)}>
                                         <AddIcon />
                                     </IconButton>

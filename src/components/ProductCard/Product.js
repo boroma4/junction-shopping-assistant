@@ -43,7 +43,7 @@ const Product = ({product, addProduct}) => {
                             <Typography variant="subtitle1" paragraph>
                                 {product.description}
                             </Typography>
-                            <Typography variant="subtitle1" color="default">
+                            <Typography variant="subtitle1">
                                 Price: {product.price}$
                                 <span>
                                     <IconButton color={'primary'} onClick={()=>addProduct(product)}>

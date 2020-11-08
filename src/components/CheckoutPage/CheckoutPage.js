@@ -19,10 +19,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
 import AddShoppingCartOutlinedIcon from "@material-ui/icons/AddShoppingCartOutlined";
+import {useHistory} from 'react-router-dom';
 
-const CheckoutPage = ({cart,setProductList, setPurchaseHistory}) => {
+const CheckoutPage = ({cart,setProductList, setPurchaseHistory,purchaseHistory}) => {
 const [localCart,setLocalCart] = useState(cart);
 const [suggestions, setSuggestions] = useState([]);
+const [finalCapResult, setFinalCupResult] = useState([]);
+const history = useHistory();
 
     const ColorButton = withStyles((theme) => ({
         root: {
@@ -38,17 +41,107 @@ const [suggestions, setSuggestions] = useState([]);
         },
     }))(Button);
 
+    const findLatestDate = () => {
+        let latest = new Date();
+        latest.setFullYear(1970,1,1);
+      for (let i=0;i<purchaseHistory.length;i++){
+          if(purchaseHistory[i].date > latest){
+              latest = purchaseHistory[i].date;
+          }
+      }
+      return latest;
+    };
+
+    const getType = (type,row) => {
+        if (type === "past"){
+            return row.type;
+        }else{
+            return row.data.type;
+        }
+    };
+
+    const getCap = (type,row) => {
+        if (type === "past"){
+            return row.cap;
+        }else{
+            return row.data.cap;
+        }
+    };
+
+    // Nevermind. Better ask
+    // Two types are applicable: "past" and "future"
+    const calculateSum = (sumFunc,products, type) => {
+        let tp8 = products.filter(row => getType(type,row)==="tp8").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let trash50 = products.filter(row => getType(type,row)==="trash50").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let shamp500 = products.filter(row => getType(type,row)==="shamp500").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let tpaste500 = products.filter(row => getType(type,row)==="tpaste500").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let tbrush = products.filter(row => getType(type,row)==="tbrush").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let plcup = products.filter(row => getType(type,row)==="plcup").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let soap500 = products.filter(row => getType(type,row)==="soap500").map((e)=>getCap(type,e))?.reduce(sumFunc,0);
+        let san500 = products.filter(row => getType(type,row)==="san500").map((e)=>getCap(type,e)).reduce(sumFunc,0);
+
+        return {
+            tp8:tp8,
+            trash50:trash50,
+            shamp500:shamp500,
+            tpaste500:tpaste500,
+            tbrush:tbrush,
+            plcup:plcup,
+            soap500:soap500,
+            san500:san500
+        }
+
+
+
+    };
+
+    const queryUserProducts = (suggestedTypes) => {
+        let suggestionArray = [];
+        for(let i=0;i<suggestedTypes.length;i++){
+            let product = PRODUCTS.filter(prod => prod.type === suggestedTypes[i])[0];
+            let previousPurchases = purchaseHistory.filter((purchase)=> purchase.type === suggestedTypes[i]);
+            if (!previousPurchases && previousPurchases.length!==0){
+                suggestionArray.push(previousPurchases[0]);
+            }
+
+        }
+        return suggestionArray;
+    };
+
     const applySuggestions = () => {
-        let suggestionsFound = [PRODUCTS[0],PRODUCTS[1],PRODUCTS[2]];
-        /*TODO******************************
-        *
-        *
-        ************************************/
-        return suggestionsFound;
+        const latestDate = findLatestDate();
+        let lastWeeksGoods = purchaseHistory.filter(purchase => purchase.date === latestDate);
+        const sumFunc = (acc,curVal)=> {return acc+curVal};
+        const sumFuncWithCalc = (acc,curVal)=> {return acc+curVal};
+
+        let lastWeekSum = calculateSum(sumFunc,lastWeeksGoods,"past");
+        let thisCartSum = calculateSum(sumFunc,cart,"future");
+        let resultSum = [];
+
+        for (let key in thisCartSum){
+            let mlt = cart.find(elem => elem.data.type === key)?.quantity;
+            if (!mlt){
+                mlt = 0;
+            }
+            if (thisCartSum !== 0){
+                thisCartSum[key] = thisCartSum[key]*mlt;
+            }
+            resultSum[key] = lastWeekSum[key]+thisCartSum[key]-7;
+        }
+
+        let suggestedTypes = [];
+        for(let key in resultSum){
+            if (resultSum[key] <= 0){
+                suggestedTypes.push(key);
+                resultSum[key] = 0;
+            }
+        }
+        setFinalCupResult(resultSum);
+        return queryUserProducts(suggestedTypes);
     };
 
     const addProduct = (product) => {
-        setProductList(prev=>{
+            setProductList(prev=>{
             let newCart = [...prev];
             const productIdx = prev.map((prod) => prod.name).indexOf(product.name);
             if(productIdx !== -1){
@@ -80,17 +173,26 @@ const [suggestions, setSuggestions] = useState([]);
     }))(Button);
 
     const onBuyClick = () =>{
-        setPurchaseHistory(prev=>{
+        let newDate = new Date();
 
+        if(purchaseHistory.length !== 0){
+            const latestDate = new Date(Math.max(...purchaseHistory.map(e => new Date(e.date))));
+            console.log(latestDate);
+            console.log(newDate);
+            newDate.setDate(latestDate.getDate() + 7);
+        }
+        setPurchaseHistory(prev=>{
             const newPurchases = cart.map(product => {
                let purchaseData = {...product.data};
                purchaseData.price *= product.quantity;
                purchaseData.cap *= product.quantity;
-               purchaseData.date = Date();
+               purchaseData.date = newDate;
                return purchaseData;
             });
             return [...prev, ...newPurchases ]
-        })
+        });
+        setProductList([]);
+        history.push("/");
     };
 
   return (
@@ -114,7 +216,7 @@ const [suggestions, setSuggestions] = useState([]);
                     <CardContent>
                         <List>
                             {suggestions.map((suggestion,idx)=>{
-                                return <ListItem>
+                                return <ListItem key={idx}>
                                     <ListItemText>
                                         {suggestion.name}
                                     </ListItemText>

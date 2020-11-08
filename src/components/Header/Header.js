@@ -134,7 +134,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
                         Popular events:
                     </Typography>
                     {events.map((event) => (
-                        <Typography variant="p"
+                        <Typography
                                 key={event.title}
                                 className={classes.toolbarEvent}
                                     onClick={()=>setSelectedEvent(event)}
