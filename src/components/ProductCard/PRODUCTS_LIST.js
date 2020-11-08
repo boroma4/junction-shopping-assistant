@@ -10,7 +10,7 @@ import Pods from '../../pics/rsz_best-toilet-tablets.jpg'
 
 export const PRODUCTS = [
     {id:0,description:"This is a relatively good toilet paper. You should be fine!", name: "Toilet paper (8 rolls)", brandName:"Toilet Paper corporation",pic:ToiletPaper,price:15, cat: 'Toilet' , cap: 7, type:'tp8'},
-    {id:1,description:"This is a very good toilet paper brand which you will surely enjoy!", name: "Elite toilet paper (8 rolls)", brandName:"Elite toilet paper corporation",pic:ToiletPaper,price:35, cat: 'Toilet' , cap: 7, type:'tp8'},
+    {id:1,description:"This is a very good toilet paper brand which you will surely enjoy!", name: "Elite toilet paper (8 rolls)", brandName:"Elite toilet paper corporation",pic:ToiletPaper,price:35, cat: 'Toilet' , cap: 7, type:'tp8', isEco:true},
     {id:2,description:"This is a very cheap toilet paper, it can save money!", name: "Cheap toilet paper (8 rolls)", brandName:"PaperCorp",pic:ToiletPaper,price:5, cat: 'Toilet' , cap: 7, type:'tp8'},
 
     {id:3,description:"The one and only!", name: "Mr Sanitize me (200ml)", brandName:"Exorcisma",pic:Sanitizer,price:69, cat: 'Misc' , cap: 20, type:'san500'},
@@ -20,14 +20,14 @@ export const PRODUCTS = [
     {id:6,description:"Pleb soap!", name: "Plain soap (500ml)", brandName:"LoBidaVolka",pic:Soap,price:5, cat: 'Bathroom' , cap: 30, type:'soap500'},
 
     {id:7,description:"A normal plastic cup.", name: "Plastic cup", brandName:"Velver",pic:Cup, price:5, cat: 'Misc' , cap: 1, type:'plcup'},
-    {id:8,description:"A sub-normal plastic cup.", name: "Plastic cup", brandName:"Dini",pic:Cup, price:8, cat: 'Misc' , cap: 1, type:'plcup'},
+    {id:8,description:"A sub-normal plastic cup.", name: "Plastic cup", brandName:"Dini",pic:Cup, price:8, cat: 'Misc' , cap: 1, type:'plcup', isEco:true},
 
     {id:9,description:"Pleb toothbrush!", name: "Toothbrush", brandName:"Cowgate",pic:Toothbrush, price:2, cat: 'Bathroom' , cap: 90, type:'tbrush'},
     {id:10,description:"Standard toothbrush!", name: "Toothbrush", brandName:"Corngate",pic:Toothbrush, price:5, cat: 'Bathroom' , cap: 90, type:'tbrush'},
     {id:11,description:"Cleans your teeth in two seconds!", name: "Brush4000", brandName:"Conjugate",pic:Toothbrush, price:100, cat: 'Bathroom' , cap: 90, type:'tbrush'},
 
     {id:12,description:"Pleb toothpaste!", name: "Toothpaste (400ml)", brandName:"Anyway",pic:Toothpaste, price:4, cat: 'Bathroom' , cap: 60, type:'tpaste500'},
-    {id:13,description:"Standard toothpaste!", name: "Toothpaste (400ml)", brandName:"Acid",pic:Toothpaste, price:10, cat: 'Bathroom' , cap: 60, type:'tpaste500'},
+    {id:13,description:"Standard toothpaste!", name: "Toothpaste (400ml)", brandName:"Acid",pic:Toothpaste, price:10, cat: 'Bathroom' , cap: 60, type:'tpaste500', isEco:true},
     {id:14,description:"You can even wash your hair with it!", name: "Toothpaste (400ml)", brandName:"Vroom Vroom",pic:Toothpaste, price:50, cat: 'Bathroom' , cap: 60, type:'tpaste500'},
 
     {id:15,description:"Your hair might fall off :)", name: "Shampoo 55 (500ml)", brandName:"FE",pic:Shampoo, price:10, cat: 'Bathroom' , cap: 30, type:'shamp500'},

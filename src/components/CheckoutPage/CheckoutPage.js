@@ -141,7 +141,7 @@ const history = useHistory();
     };
 
     const addProduct = (product) => {
-            setProductList(prev=>{
+        setProductList(prev=>{
             let newCart = [...prev];
             const productIdx = prev.map((prod) => prod.name).indexOf(product.name);
             if(productIdx !== -1){

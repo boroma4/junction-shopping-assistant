@@ -19,13 +19,19 @@ const mainFeaturedPost = {
     linkText: 'Pre-order today...',
 };
 
-export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn}) {
+export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn, userSettings}) {
 
     const [searchValue, setSearchValue] = useState('');
 
-    const getFilteredProducts = () => PRODUCTS.filter(value => {
-        return value.name.toLowerCase().includes(searchValue) || value.brandName.toLowerCase().includes(searchValue)
-    });
+    const getFilteredProducts = () => {
+        const filtered =  PRODUCTS.filter(value => value.name.toLowerCase().includes(searchValue) || value.brandName.toLowerCase().includes(searchValue));
+        if(userSettings.eco) {
+            filtered.sort((a, b) => {
+                return (a.isEco === b.isEco) ? 0 : a.isEco ? -1 : 1;
+            });
+        }
+        return filtered;
+    };
 
 
     const addProductToCart = (product) =>{

@@ -27,12 +27,15 @@ const useStyles = makeStyles((theme) => ({
     toolbarSecondary: {
         justifyContent: 'start',
         overflowX: 'auto',
-        marginBottom:'1vh'
+        marginBottom:'1vh',
+        width:'fit-content',
+        border:'2px solid black'
     },
     toolbarEvent: {
         padding: theme.spacing(2),
         flexShrink: 0,
         cursor:'pointer',
+        textDecoration: 'underline',
         "&:hover": {
             textDecoration: 'underline',
             color:'gray'
@@ -131,7 +134,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
             {showEvents &&
                 <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                     <Typography variant="h6">
-                        Popular events:
+                        🕒 Popular purchase lists:
                     </Typography>
                     {events.map((event) => (
                         <Typography
