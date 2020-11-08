@@ -3,9 +3,9 @@ import '../UserProfile/Profile.css';
 import { VictoryBar, VictoryChart} from "victory";
 
 const sampleData = [
-    { x: "Shampoo", y: 400 },
-    { x: "Toothpaste", y: 700 },
-    { x: "Toothbrush", y: 100 },
+    { x: "Shampoo", y: 80 },
+    { x: "Toothpaste", y: 40 },
+    { x: "Toothbrush", y:  60},
 ];
 const HistogramGraph = () => {
     return (
