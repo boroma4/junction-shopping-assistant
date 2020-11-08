@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Header({events, setSelectedEvent, productList, setProductList, isSignedIn, setIsSignedIn, setSearchValue}) {
+export default function Header({events, setSelectedEvent, productList, setProductList, isSignedIn, setIsSignedIn, setSearchValue, purchaseHistory}) {
 
     let history = useHistory();
     const classes = useStyles();
@@ -85,7 +85,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
                 <img src={logo} alt="Logo" height="50" width="60" onClick={()=>history.push('/')} className={classes.logo}/>
                 <SearchBar
                     className={classes.searchBar}
-                    onChange={(newValue) => setSearchValue(newValue)}
+                    onChange={(newValue) => setSearchValue(newValue.toLowerCase())}
                     //onRequestSearch={() => doSomethingWith(this.state.value)}
                 />
                 <div className={classes.rightSide}>
@@ -109,7 +109,7 @@ export default function Header({events, setSelectedEvent, productList, setProduc
                             }}
                             transitionDuration={800}
                         >
-                            <CartPopup productList={productList} setProductList={setProductList}/>
+                            <CartPopup productList={productList} setProductList={setProductList} purchaseHistory={purchaseHistory}/>
                         </Popover>
                     </IconButton>
                     {isSignedIn

@@ -11,7 +11,7 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-export default function Profile({ productList, setProductList, purchaseHistory, userSettings, setUserSettings }) {
+export default function Profile({ productList, setProductList, purchaseHistory, userSettings, setUserSettings, tab }) {
   return (
     <div>
       <HeaderProfilePage
@@ -19,7 +19,7 @@ export default function Profile({ productList, setProductList, purchaseHistory, 
         setProductList={setProductList}
       />
 
-      <Tabs>
+      <Tabs defaultIndex={tab ? tab : 0}>
         <TabList>
           <Tab><AccountCircleIcon/> Profile</Tab>
           <Tab><AccountBalanceIcon/>Budget</Tab>

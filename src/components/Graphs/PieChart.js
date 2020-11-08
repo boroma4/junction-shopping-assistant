@@ -33,7 +33,7 @@ const PieChart = ({ purchaseHistory }) => {
 
         <Container >
             {purchaseHistory.length === 0 ?
-                <h1 className="centered">You have made no purchase Yet</h1> :
+                <h1 className="centered">Your purchase history is empty</h1> :
                 <Grid className="graph" container spacing={2} alignContent={"center"}>
                     <Grid item xs={6}>
                         <VictoryPie
@@ -57,6 +57,7 @@ const PieChart = ({ purchaseHistory }) => {
                                 }
                             }]}
                         />
+                        {'Last month\'s purchases'}
                     </Grid>
                     <Grid item xs={6}>
                         {textType && isHistogram ?

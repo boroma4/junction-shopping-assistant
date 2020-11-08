@@ -19,7 +19,7 @@ const mainFeaturedPost = {
     linkText: 'Pre-order today...',
 };
 
-export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn, userSettings}) {
+export default function MainPage({event, setEvent, productList, setProductList, isSignedIn, setIsSignedIn, userSettings,purchaseHistory}) {
 
     const [searchValue, setSearchValue] = useState('');
 
@@ -60,6 +60,7 @@ export default function MainPage({event, setEvent, productList, setProductList, 
                     isSignedIn={isSignedIn}
                     setIsSignedIn={setIsSignedIn}
                     setSearchValue={setSearchValue}
+                    purchaseHistory={purchaseHistory}
                 />
                 <main style={{display: "flex", alignItems: "flex-start"}}>
                     <div>
