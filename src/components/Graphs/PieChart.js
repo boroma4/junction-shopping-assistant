@@ -7,60 +7,65 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import HistogramGraphToilet from "./HistogramGraphToilet";
 import HistogramGraphMiscellenaous from "./HistogramGraphMisecllenaous";
+import '../UserProfile/Profile.css'
 
 
-const PieChart = ({purchaseHistory}) => {
+const PieChart = ({ purchaseHistory }) => {
 
     const distinctCats = new Set(purchaseHistory.map(purchase => purchase.cat));
     let myData = [];
 
-    for(const cat of distinctCats){
+    for (const cat of distinctCats) {
         const sum = purchaseHistory.filter(purchase => purchase.cat === cat).reduce((total, purchase) => total + purchase.price, 0);
-        myData.push({x: `${cat} ${sum}$`, y: sum});
+        myData.push({ x: `${cat} ${sum}$`, y: sum });
     }
 
     const [isHistogram, setIsHistogram] = useState(false);
-    const [textType,setTextType] = useState(undefined);
+    const [textType, setTextType] = useState(undefined);
 
     const decideHistogram = (text) => {
-        if (text.includes('Toilet')) return <HistogramGraphToilet purchaseHistory={purchaseHistory}/>;
-        if (text.includes('Bathroom')) return <HistogramGraph purchaseHistory={purchaseHistory}/>;
-        if (text.includes('Misc')) return <HistogramGraphMiscellenaous purchaseHistory={purchaseHistory}/>;
+        if (text.includes('Toilet')) return <HistogramGraphToilet purchaseHistory={purchaseHistory} />;
+        if (text.includes('Bathroom')) return <HistogramGraph purchaseHistory={purchaseHistory} />;
+        if (text.includes('Misc')) return <HistogramGraphMiscellenaous purchaseHistory={purchaseHistory} />;
     };
 
     return (
+
         <Container >
-            <Grid className="graph" container spacing={2} alignContent={"center"}>
-                <Grid item xs={6}>
-                    <VictoryPie
-                        data={myData}
-                        colorScale={["#007df5", "ffc362", "#ff8a93"]}
-                        radius={100}
-                        events={[{
-                            target: "data",
-                            eventHandlers: {
-                              onClick: () => {
-                                return [
-                                    {
-                                    target: "labels",
-                                    mutation: ({ text }) => {
-                                        setIsHistogram(true);
-                                        setTextType(text);
+            {purchaseHistory.length === 0 ?
+                <h1 className="centered">You have made no purchase Yet</h1> :
+                <Grid className="graph" container spacing={2} alignContent={"center"}>
+                    <Grid item xs={6}>
+                        <VictoryPie
+                            data={myData}
+                            colorScale={["#007df5", "ffc362", "#ff8a93"]}
+                            radius={100}
+                            events={[{
+                                target: "data",
+                                eventHandlers: {
+                                    onClick: () => {
+                                        return [
+                                            {
+                                                target: "labels",
+                                                mutation: ({ text }) => {
+                                                    setIsHistogram(true);
+                                                    setTextType(text);
+                                                }
+                                            }
+                                        ];
                                     }
-                                  }
-                                ];
-                              }
-                            }
-                          }]}
-                    />
+                                }
+                            }]}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        {textType && isHistogram ?
+                            (decideHistogram(textType)) :
+                            (<></>)
+                        }
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                    {textType && isHistogram ?
-                        (decideHistogram(textType)) :
-                        (<></>)
-                    }
-                </Grid>
-            </Grid>
+            }
         </Container>
     );
 };
